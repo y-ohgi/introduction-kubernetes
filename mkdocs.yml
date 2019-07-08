@@ -1,0 +1,60 @@
+site_name: '入門 Kubernetes'
+
+theme:
+  name: 'material'
+  language: 'ja'
+  palette:
+    primary: 'blue'
+    accent: 'blue'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  highlightjs: true
+  hljs_languages:
+    - 'yaml'
+    - 'dockerfile'
+
+extra:
+  search:
+    language: 'ja'
+
+markdown_extensions:
+  - 'admonition'
+  - 'footnotes'
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra_css:
+  - "assets/custom.css"
+
+extra_javascript:
+  - 'assets/custom.js'
+
+nav:
+  - 'Home': 'index.md'
+  - 'はじめに':
+    - 'Dockerとは': '1_introduction/docker.md'
+    - 'コンテナオーケストレーションツールとは': '1_introduction/orchestration.md'
+    - 'Kubernetesとは': '1_introduction/kubernetes.md'
+  - 'さわってみる':
+    - 'クラスターの作成': '2_handson/cluster.md'
+    - 'コンテナの作成': '2_handson/cluster.md'
+    - 'リクエストを受け付ける': '2_handson/request.md'
+    - 'コードで定義する': '2_handson/iac.md'
+  - 'Objectsを知る':
+    - 'Pod': '3_objects/pod.md'
+    - 'ReplicaSet': '3_objects/replicaset.md'
+    - 'Deployment': '3_objects/deployment.md'
+    - 'Service': '3_objects/service.md'
+    - 'Ingress': '3_objects/ingress.md'
+    - 'その他': '3_objects/other.md'
+  - '自作アプリを作る':
+    - 'Dockerイメージの作成': '4_selfmade/dockerimage.md'
+    - 'Kubernetes上で動かす': '4_selfmade/dockerimage.md'
+    - 'ロードバランサを立てる': '4_selfmade/dockerimage.md'
+    - 'CD': '4_selfmade/cd.md'
+  - '次のステップ': 'nextstep.md'
