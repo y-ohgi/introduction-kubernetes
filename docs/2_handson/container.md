@@ -4,8 +4,6 @@ NginxのDockerイメージをGKE上で起動してみましょう。
 `kubectl create deployment <命名> --image=<Dockerイメージ>` でDockerを起動することができます。  
 今回は **"handson"** という名前で **"nginx Dockerイメージ"** を起動してみましょう。  
 
-また、立ち上げたnginxコンテナへトラフィックを流したいため、 `--port 80` で80ポートでトラフィックを受けられるよう設定します。
-
 ```console
 $ kubectl create deployment handson --image nginx
 deployment.apps/handson created
