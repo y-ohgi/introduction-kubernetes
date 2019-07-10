@@ -45,6 +45,7 @@ nav:
     - 'コンテナの作成': '2_handson/container.md'
     - 'ロードバランサを立てる': '2_handson/loadbalancer.md'
     - 'コードで定義する': '2_handson/iac.md'
+    - '片付け': '2_handson/finish.md'
   - 'Objectsを知る':
     - 'Pod': '3_objects/pod.md'
     - 'ReplicaSet': '3_objects/replicaset.md'
