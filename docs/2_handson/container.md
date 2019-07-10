@@ -7,7 +7,7 @@ NginxのDockerイメージをGKE上で起動してみましょう。
 また、立ち上げたnginxコンテナへトラフィックを流したいため、 `--port 80` で80ポートでトラフィックを受けられるよう設定します。
 
 ```console
-$  create deployment handson --image nginx
+$ kubectl create deployment handson --image nginx
 deployment.apps/handson created
 ```
 
@@ -34,10 +34,11 @@ Kubernetesはクラスタ内のコンテナをローカルへポートフォワ�
 先程立ち上げたnginxコンテナをローカルから見てみましょう。
 
 `kubectl port-foward` コマンドでポートフォワードを簡単に行なえます。  
-以下のコマンドでnginxコンテナの80ポートをローカルの8080へポートフォワードを行ってみましょう。
+以下のコマンドでnginxコンテナの80ポートをローカルの8080へポートフォワードを行ってみましょう。  
+`<POD ID>` は `kubectl get pods` で取得します。
 
 ```console
-$ kubectl port-forward <PID ID> 8080:80
+$ kubectl port-forward <POD ID> 8080:80
 ```
 
 これでローカルの8080へポートフォワードが行えました。  
