@@ -42,8 +42,8 @@ nav:
     - 'Kubernetesとは': '1_introduction/kubernetes.md'
   - 'さわってみる':
     - 'クラスターの作成': '2_handson/cluster.md'
-    - 'コンテナの作成': '2_handson/cluster.md'
-    - 'リクエストを受け付ける': '2_handson/request.md'
+    - 'コンテナの作成': '2_handson/container.md'
+    - 'ロードバランサを立てる': '2_handson/loadbalancer.md'
     - 'コードで定義する': '2_handson/iac.md'
   - 'Objectsを知る':
     - 'Pod': '3_objects/pod.md'
@@ -57,4 +57,5 @@ nav:
     - 'Kubernetes上で動かす': '4_selfmade/dockerimage.md'
     - 'ロードバランサを立てる': '4_selfmade/dockerimage.md'
     - 'CD': '4_selfmade/cd.md'
-  - '次のステップ': 'nextstep.md'
+    - 'telepresenceを用いた開発': '4_selfmade/telepresence.md'
+  - '次のステップ': '5_nextstep/index.md'
