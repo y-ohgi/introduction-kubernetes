@@ -48,7 +48,7 @@ DeploymentがReplicaSetを管理し、ReplicaSetがPodを管理しています�
 
 まず、現在のdeploymentのイメージが `nginx:1.16` であることを確認します。
 ```console
-$ kubectl get deploy mynginx -o yaml | grep image
+$ kubectl get deploy mynginx -o yaml | grep "- image:"
       - image: nginx:1.16
 ```
 
@@ -64,7 +64,7 @@ $ kubectl get pods
 NAME                       READY   STATUS        RESTARTS   AGE
 mynginx-5559c9b58-rzrcc    1/1     Terminating   0          18m
 mynginx-84fc57c5f9-6mst8   1/1     Running       0          5s
-$ kubectl get deploy mynginx -o yaml | grep image
+$ kubectl get deploy mynginx -o yaml | grep "- image:"
       - image: nginx:1.17
 ```
 
@@ -125,7 +125,7 @@ deployment.extensions/mynginx
 
 deploymentの状態を確認すると `nginx:1.16` になっていますね。
 ```console
-$ kubectl get deploy mynginx -o yaml | grep image
+$ kubectl get deploy mynginx -o yaml | grep "- image:"
       - image: nginx:1.16
 ```
 

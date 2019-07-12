@@ -35,8 +35,9 @@ EOL
 
 ReplicaSetが作成されたかみてみましょう。  
 `kubectl get` に `replicaset` を指定することで現在起動しているReplicaSetを閲覧することができます。
+
 ```console
-kubectl get replicaset
+$ kubectl get replicaset
 NAME      DESIRED   CURRENT   READY   AGE
 mynginx   2         2         2       17s
 ```

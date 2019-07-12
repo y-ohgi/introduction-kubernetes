@@ -37,8 +37,8 @@ replicaset.apps/handson-86f796b8b7   1         1         1         4m
 GCPコンソールからKubernetes Objects の詳細を閲覧することができます。  
 今回動かした **"handson"** という名前をつけたObjectsがどのように動いているのかGCPコンソール上で見てみましょう。
 
-コンテナの状態を確認  
-( [StackDriver](https://app.google.stackdriver.com) を有効化していないとCPU/Memoryなどのメトリクスは取得できません)
+コンテナの状態の確認  
+_( [StackDriver](https://app.google.stackdriver.com) を有効化していないとCPU/Memoryなどのメトリクスは取得できません)_
 ![gke workload](imgs/gke-workload.png)
 
 ロードバランサの確認  
