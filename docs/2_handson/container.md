@@ -101,7 +101,7 @@ handson-5676646c85-vwkxd   1/1     Running   0          7s
 
 再度新しく起動されたPodを指定してポートフォワードを実行してみましょう。  
 ```console
-$ kubectl port-forward <POD NAME>
+$ kubectl port-forward <POD NAME> 8080:80
 ```
 
 gcloudのwebプレビューから確認し、編集前のindex.htmlになっていることが確認できるはずです。
