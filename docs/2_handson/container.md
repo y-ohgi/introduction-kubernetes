@@ -33,10 +33,10 @@ Kubernetesはクラスタ内のコンテナをローカルへポートフォワ�
 
 `kubectl port-foward` コマンドでポートフォワードを簡単に行なえます。  
 以下のコマンドでnginxコンテナの80ポートをローカルの8080へポートフォワードを行ってみましょう。  
-`<POD ID>` は `kubectl get pods` で取得します。
+`<POD NAME>` は `kubectl get pods` で取得します。
 
 ```console
-$ kubectl port-forward <POD ID> 8080:80
+$ kubectl port-forward <POD NAME> 8080:80
 ```
 
 これでローカルの8080へポートフォワードが行えました。  
@@ -51,7 +51,7 @@ gcloudのプレビュー機能を使ってnginxが起動できているか確認
 Kubernetesは起動中のコンテナにコマンドを実行することが可能です。  
 実際にbashを立ち上げて、index.htmlを編集してみましょう。
 
-起動中のPodのIDを取得します。
+起動中のPodのNAMEを取得します。
 ```console
 $ kubectl get pods
 NAME                       READY   STATUS    RESTARTS   AGE
@@ -62,7 +62,7 @@ handson-5676646c85-dbt4m   1/1     Running   0          34m
 bashコマンドを実行してコンテナの中に入ってみましょう。
 
 ```console
-$ kubectl exec -it <POD ID> bash
+$ kubectl exec -it <POD NAME> bash
 root@handson-5676646c85-dbt4m:/#
 ```
 
@@ -80,7 +80,7 @@ index.htmlの存在を確認し、 "hello" という文字列を書き込みま�
 ## 自動復旧の確認
 Kubernetesの自動復旧機能を確認してみましょう。  
 
-先程作成したPodのIDを確認し、削除してみましょう。
+先程作成したPodのNAMEを確認し、削除してみましょう。
 ```console
 $ kubectl get pods
 NAME                       READY   STATUS    RESTARTS   AGE
@@ -98,4 +98,10 @@ handson-5676646c85-vwkxd   1/1     Running   0          7s
 ```
 
 では、index.htmlはどうなっているでしょうか。  
+
+再度新しく起動されたPodを指定してポートフォワードを実行してみましょう。  
+```console
+$ kubectl port-forward <POD NAME>
+```
+
 gcloudのwebプレビューから確認し、編集前のindex.htmlになっていることが確認できるはずです。
