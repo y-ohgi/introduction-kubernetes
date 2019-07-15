@@ -132,3 +132,7 @@ metadata:
 ```console
 $ kubectl delete pod mynginx
 ```
+
+## 参照
+- [Pods - Kubernetes](https://kubernetes.io/docs/concepts/workloads/pods/pod/)
+- [Pod  |  Kubernetes Engine Documentation  |  Google Cloud](https://cloud.google.com/kubernetes-engine/docs/concepts/pod)
