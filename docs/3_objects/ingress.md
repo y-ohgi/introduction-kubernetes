@@ -15,6 +15,7 @@ $ vi ingress.yaml
 ```
 
 ```yaml
+# 2台のnginxを立ち上げるDeployment
 apiVersion: apps/v1
 kind: Deployment
 
@@ -24,7 +25,7 @@ metadata:
   name: mynginx
 
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: mynginx
@@ -38,6 +39,7 @@ spec:
         name: mynginx
 
 ---
+# "mynginx"という名前でNodePort Serviceを作成
 apiVersion: v1
 kind: Service
 
@@ -56,6 +58,7 @@ spec:
   type: NodePort
 
 ---
+# "mynginx" Serviceへトラフィックを振り分けるロードバランサを作成
 apiVersion: extensions/v1beta1
 kind: Ingress
 

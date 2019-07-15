@@ -160,3 +160,7 @@ Pod Template:
 ```console
 $ kubectl delete deployment mynginx
 ```
+
+## 参照
+- [Deployments - Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- [Deployment  |  Kubernetes Engine Documentation  |  Google Cloud](https://cloud.google.com/kubernetes-engine/docs/concepts/deployment)

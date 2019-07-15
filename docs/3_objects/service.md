@@ -217,3 +217,8 @@ Deploymentの削除
 ```console
 $ kubectl delete deployment mynginx
 ```
+
+## 参照
+- [Service - Kubernetes](https://kubernetes.io/docs/concepts/services-networking/service/)
+- [Kubernetesの Service についてまとめてみた - Qiita](https://qiita.com/kouares/items/94a073baed9dffe86ea0)
+- [Service  |  Kubernetes Engine Documentation  |  Google Cloud](https://cloud.google.com/kubernetes-engine/docs/concepts/service)
