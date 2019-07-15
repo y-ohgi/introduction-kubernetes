@@ -111,3 +111,7 @@ mynginx-qs9js   1/1     Running   0          4s
 ```
 $ kubectl delete replicaset mynginx
 ```
+
+## 参照
+- [ReplicaSet - Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
+- [Kubernetesはクラスタで障害があったとき、どういう動きをするのか - あさのひとりごと](http://dr-asa.hatenablog.com/entry/2018/04/02/174006)
