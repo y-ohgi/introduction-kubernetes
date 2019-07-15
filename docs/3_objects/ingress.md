@@ -41,7 +41,7 @@ spec:
         - containerPort: 80
 
 ---
-# "mynginx"という名前でNodePort Serviceを作成
+# "mynginx"という名前のtype: NodePortのServiceを作成
 apiVersion: v1
 kind: Service
 
@@ -72,3 +72,44 @@ spec:
     serviceName: mynginx
     servicePort: 80
 ```
+
+```console
+$ kubectl apply -f ingress.yaml
+```
+
+## 確認してみる
+Podが配置されていることを確認しましょう
+```console
+$ kubectl get all
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/mynginx-5c7cb97c48-gkcn7   1/1     Running   0          3m21s
+pod/mynginx-5c7cb97c48-wmlx4   1/1     Running   0          3m22s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)        AGE
+service/kubernetes   ClusterIP   10.4.0.1     <none>        443/TCP        65m
+service/mynginx      NodePort    10.4.5.246   <none>        80:32347/TCP   40m
+
+NAME                      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/mynginx   2         2         2            2           40m
+
+NAME                                 DESIRED   CURRENT   READY   AGE
+replicaset.apps/mynginx-5c7cb97c48   2         2         2       3m22s
+```
+
+Ingressは `kubectl get ingress` で取得することができます。
+```console
+$ kubectl get ingress
+NAME      HOSTS   ADDRESS        PORTS   AGE
+mynginx   *       <YOUR ADDRESS> 80      41m
+```
+
+ADDRESSへ表示されたIPへ接続して、nginxが起動していることを確認しましょう。
+
+## お片付け
+```console
+$ kubectl delete -f ingress.yaml
+```
+
+
+## 参考
+- [Ingress - Kubernetes](https://kubernetes.io/docs/concepts/services-networking/ingress/)
