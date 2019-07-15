@@ -37,6 +37,8 @@ spec:
       containers:
       - image: nginx:latest
         name: mynginx
+        ports:
+        - containerPort: 80
 
 ---
 # "mynginx"という名前でNodePort Serviceを作成
