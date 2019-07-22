@@ -48,7 +48,7 @@ DeploymentがReplicaSetを管理し、ReplicaSetがPodを管理しています�
 
 まず、現在のdeploymentのイメージが `nginx:1.16` であることを確認します。
 ```console
-$ kubectl get deploy mynginx -o yaml | grep "- image:"
+$ kubectl get deploy mynginx -o yaml | grep "image:"
       - image: nginx:1.16
 ```
 
