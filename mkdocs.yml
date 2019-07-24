@@ -53,10 +53,10 @@ nav:
     - 'Service': '3_objects/service.md'
     - 'Ingress': '3_objects/ingress.md'
     - 'その他': '3_objects/other.md'
-  - '自作アプリを作る':
-    - 'Dockerイメージの作成': '4_selfmade/dockerimage.md'
-    - 'Kubernetes上で動かす': '4_selfmade/dockerimage.md'
-    - 'ロードバランサを立てる': '4_selfmade/dockerimage.md'
-    - 'CD': '4_selfmade/cd.md'
-    - 'telepresenceを用いた開発': '4_selfmade/telepresence.md'
+  # - '自作アプリを作る':
+  #   - 'Dockerイメージの作成': '4_selfmade/dockerimage.md'
+  #   - 'Kubernetes上で動かす': '4_selfmade/dockerimage.md'
+  #   - 'ロードバランサを立てる': '4_selfmade/dockerimage.md'
+  #   - 'CD': '4_selfmade/cd.md'
+  #   - 'telepresenceを用いた開発': '4_selfmade/telepresence.md'
   - '次のステップ': '5_nextstep/index.md'
