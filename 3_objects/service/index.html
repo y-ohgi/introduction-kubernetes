@@ -1,0 +1,928 @@
+
+
+
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="クリップボードへコピー">
+      
+        <meta name="lang:clipboard.copied" content="コピーしました">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="何も見つかりませんでした">
+      
+        <meta name="lang:search.result.one" content="1件見つかりました">
+      
+        <meta name="lang:search.result.other" content="#件見つかりました">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-　、。，．]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>Service - 入門 Kubernetes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../assets/custom.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#service" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="入門 Kubernetes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              入門 Kubernetes
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Service
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            検索キーワードを入力してください
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="入門 Kubernetes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    入門 Kubernetes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      はじめに
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        はじめに
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1_introduction/docker/" title="Dockerとは" class="md-nav__link">
+      Dockerとは
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1_introduction/orchestration/" title="コンテナオーケストレーションツールとは" class="md-nav__link">
+      コンテナオーケストレーションツールとは
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1_introduction/kubernetes/" title="Kubernetesとは" class="md-nav__link">
+      Kubernetesとは
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      さわってみる
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        さわってみる
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2_handson/cluster/" title="クラスターの作成" class="md-nav__link">
+      クラスターの作成
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2_handson/container/" title="コンテナの作成" class="md-nav__link">
+      コンテナの作成
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2_handson/loadbalancer/" title="ロードバランサを立てる" class="md-nav__link">
+      ロードバランサを立てる
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2_handson/iac/" title="コードで定義する" class="md-nav__link">
+      コードで定義する
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2_handson/finish/" title="片付け" class="md-nav__link">
+      片付け
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Objectsを知る
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Objectsを知る
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../pod/" title="Pod" class="md-nav__link">
+      Pod
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../replicaset/" title="ReplicaSet" class="md-nav__link">
+      ReplicaSet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" title="Deployment" class="md-nav__link">
+      Deployment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Service
+      </label>
+    
+    <a href="./" title="Service" class="md-nav__link md-nav__link--active">
+      Service
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#service" title="Serviceとは" class="md-nav__link">
+    Serviceとは
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service_1" title="Serviceを作成する" class="md-nav__link">
+    Serviceを作成する
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="おまけ" class="md-nav__link">
+    おまけ
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pod" title="Podの更新" class="md-nav__link">
+    Podの更新
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pod_1" title="Podのスケールアウト" class="md-nav__link">
+    Podのスケールアウト
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="お片付け" class="md-nav__link">
+    お片付け
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="参照" class="md-nav__link">
+    参照
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ingress/" title="Ingress" class="md-nav__link">
+      Ingress
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../other/" title="その他" class="md-nav__link">
+      その他
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../5_nextstep/" title="次のステップ" class="md-nav__link">
+      次のステップ
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#service" title="Serviceとは" class="md-nav__link">
+    Serviceとは
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service_1" title="Serviceを作成する" class="md-nav__link">
+    Serviceを作成する
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="おまけ" class="md-nav__link">
+    おまけ
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pod" title="Podの更新" class="md-nav__link">
+    Podの更新
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pod_1" title="Podのスケールアウト" class="md-nav__link">
+    Podのスケールアウト
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="お片付け" class="md-nav__link">
+    お片付け
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="参照" class="md-nav__link">
+    参照
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Service</h1>
+                
+                <p><img alt="service-discovery" src="../imgs/service-discovery.png" /></p>
+<h2 id="service">Serviceとは<a class="headerlink" href="#service" title="Permanent link">&para;</a></h2>
+<p>Serviceはサービスディスカバリを提供するObjectです。</p>
+<p>サービスディスカバリとは、例えばフロントエンドからバックエンドのサービスに接続したいとき、フロントエンドはバックエンドサービスのエンドポイントを知る必要があります。  </p>
+<p>PodにはPrivate IP が付与されますが、（以下のように）Podは新規作成/削除されると動的にIPが変わります  </p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl create deploy myapp --image nginx
+<span class="go">deployment.apps/myapp created</span>
+<span class="gp">$</span> kubectl get pod -o wide
+<span class="go">NAME                   READY   STATUS    RESTARTS   AGE   IP          NODE                                                NOMINATED NODE</span>
+<span class="go">myapp-ddb58c99-ldw8t   1/1     Running   0          17s   10.0.2.15   gke-standard-cluster-1-default-pool-0423aa15-rbfv   &lt;none&gt;</span>
+<span class="gp">$</span> kubectl delete pod myapp-ddb58c99-ldw8t
+<span class="go">pod &quot;myapp-ddb58c99-ldw8t&quot; deleted</span>
+<span class="gp">$</span> kubectl get pod -o wide
+<span class="go">NAME                   READY   STATUS    RESTARTS   AGE   IP          NODE                                                NOMINATED NODE</span>
+<span class="go">myapp-ddb58c99-gxs65   1/1     Running   0          10s   10.0.2.16   gke-standard-cluster-1-default-pool-0423aa15-rbfv   &lt;none&gt;</span>
+<span class="gp">$</span> kubectl delete deploy myapp
+</pre></div>
+
+
+<p>KubernetesはこういったPod間の疎通の手段として <strong>Service</strong> というObjectを用意しています。<br />
+Serviceを使用することでPodへの固定されたエンドポイントを提供してくれます。</p>
+<p>このドキュメントは「手を動かして入門する」ことをテーマとしているため、まずは実際にServiceを作成してみましょう</p>
+<h2 id="service_1">Serviceを作成する<a class="headerlink" href="#service_1" title="Permanent link">&para;</a></h2>
+<p><img alt="service-access" src="../imgs/service-access.png" /></p>
+<p>実際にServiceを作成し、そのエンドポイントに対してアクセスしてみましょう</p>
+<p>まずはnginxを使用してDeploymentを作成します。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl create deploy mynginx --image nginx
+<span class="go">deployment.apps/mynginx created</span>
+</pre></div>
+
+
+<p>作成したnginxのPodに対してServiceを作成し、エンドポイントを作成します。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl expose deployment mynginx --port<span class="o">=</span><span class="m">80</span> --target-port<span class="o">=</span><span class="m">80</span>
+<span class="go">service/mynginx exposed</span>
+</pre></div>
+
+
+<p>これでServiceの作成は完了です。<br />
+Serviceが作成され、エンドポイント(CLUSTER-IP)が作成されているか確認しましょう。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl get service
+<span class="go">NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE</span>
+<span class="go">kubernetes   ClusterIP   10.3.240.1     &lt;none&gt;        443/TCP   2d10h</span>
+<span class="go">mynginx      ClusterIP   10.3.255.103   &lt;none&gt;        80/TCP    27s</span>
+</pre></div>
+
+
+<p>Pod間の疎通が可能か確認します。<br />
+クラスタ内にAmazonLinuxイメージを使用してPodを立ち上げ、作成されたエンドポイント("CLUSTER-IP")へアクセスしてみましょう。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl run --rm --restart Never --image amazonlinux:2 -it -- sh
+<span class="go">If you don&#39;t see a command prompt, try pressing enter.</span>
+<span class="gp">#</span> curl &lt;CLUSTER-IP&gt;:80
+<span class="go">&lt;!DOCTYPE html&gt;</span>
+<span class="go">&lt;html&gt;</span>
+<span class="go">&lt;head&gt;</span>
+<span class="go">&lt;title&gt;Welcome to nginx!&lt;/title&gt;</span>
+<span class="go">  :</span>
+<span class="gp">#</span> <span class="nb">exit</span>
+</pre></div>
+
+
+<p>Serviceは作成時にDNSが自動的に割り当てられます。<br />
+今回は"mynginx"と命名をしたので、"mynginx.default.svc.cluster.local"が割り当てられます。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl run --rm --restart Never --image amazonlinux:2 -it -- sh
+<span class="go">If you don&#39;t see a command prompt, try pressing enter.</span>
+<span class="gp">#</span> yum install -y bind-utils
+<span class="go">  :</span>
+<span class="gp">#</span> dig mynginx.default.svc.cluster.local
+<span class="go">  :</span>
+<span class="go">;; ANSWER SECTION:</span>
+<span class="go">mynginx.default.svc.cluster.local. 30 IN A      10.3.255.103</span>
+<span class="go">  :</span>
+</pre></div>
+
+
+<p>curlもしてみましょう。</p>
+<div class="codehilite"><pre><span></span><span class="gp">#</span> curl mynginx.default.svc.cluster.local:80
+<span class="go">&lt;!DOCTYPE html&gt;</span>
+<span class="go">&lt;html&gt;</span>
+<span class="go">&lt;head&gt;</span>
+<span class="go">&lt;title&gt;Welcome to nginx!&lt;/title&gt;</span>
+<span class="go">  :</span>
+<span class="gp">#</span> <span class="nb">exit</span>
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">DNSの命名規則</p>
+<p>DNSは以下の通りの命名規則で割り当てられます。<br />
+<code>&lt;Service名&gt;.&lt;Namespace名&gt;.svc.cluster.local</code><br />
+Service名は <code>kubectl expose</code> で指定した名前になります。<br />
+Namespaceは環境（本番やステージングなど）を分ける際に使用します。何も指定しない場合は"default"という名前の環境が使用されます。<br />
+また、同一Namespace内であればService名だけでアクセスすることも可能です。 e.g. <code>curl mynginx:80</code></p>
+</div>
+<h2 id="_1">おまけ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="pod">Podの更新<a class="headerlink" href="#pod" title="Permanent link">&para;</a></h3>
+<p>PodのIPが変わっても同一のエンドポイントでアクセスできるか確認します。  </p>
+<p>既存のPodのIPを確認します。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl get pods -o wide
+<span class="go">NAME                       READY   STATUS    RESTARTS   AGE   IP          NODE                                                NOMINATED NODE</span>
+<span class="go">mynginx-784f9847d4-nf9ns   1/1     Running   0          36s   10.0.2.26   gke-standard-cluster-1-default-pool-0423aa15-rbfv   &lt;none&gt;</span>
+</pre></div>
+
+
+<p>Serviceのエンドポイントへアクセスしてみます。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl run amazonlinux2 --rm --restart Never --image amazonlinux:2 -it -- curl -I mynginx.default.svc.cluster.local:80
+<span class="go">HTTP/1.1 200 OK</span>
+<span class="go">Server: nginx/1.17.1</span>
+<span class="go">Date: Fri, 12 Jul 2019 17:21:41 GMT</span>
+<span class="go">Content-Type: text/html</span>
+<span class="go">Content-Length: 612</span>
+<span class="go">Last-Modified: Tue, 25 Jun 2019 12:19:45 GMT</span>
+<span class="go">Connection: keep-alive</span>
+<span class="go">ETag: &quot;5d121161-264&quot;</span>
+<span class="go">Accept-Ranges: bytes</span>
+
+<span class="go">pod &quot;amazonlinux2&quot; deleted</span>
+</pre></div>
+
+
+<p>次に、Podに付与されたIPを直接叩いてみましょう。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl run amazonlinux2 --rm --restart Never --image amazonlinux:2 -it -- curl -I <span class="m">10</span>.0.2.26:80
+<span class="go">HTTP/1.1 200 OK</span>
+<span class="go">Server: nginx/1.17.1</span>
+<span class="go">Date: Fri, 12 Jul 2019 17:24:40 GMT</span>
+<span class="go">Content-Type: text/html</span>
+<span class="go">Content-Length: 612</span>
+<span class="go">Last-Modified: Tue, 25 Jun 2019 12:19:45 GMT</span>
+<span class="go">Connection: keep-alive</span>
+<span class="go">ETag: &quot;5d121161-264&quot;</span>
+<span class="go">Accept-Ranges: bytes</span>
+
+<span class="go">pod &quot;amazonlinux2&quot; deleted</span>
+</pre></div>
+
+
+<p>Podを削除してみましょう。<br />
+IPが更新されるはずです。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl get pods -o wide
+<span class="go">NAME                       READY   STATUS    RESTARTS   AGE   IP          NODE                                                NOMINATED NODE</span>
+<span class="go">mynginx-784f9847d4-nf9ns   1/1     Running   0          36s   10.0.2.26   gke-standard-cluster-1-default-pool-0423aa15-rbfv   &lt;none&gt;</span>
+<span class="gp">$</span> kubectl delete pod mynginx-784f9847d4-nf9ns
+<span class="go">pod &quot;mynginx-784f9847d4-nf9ns&quot; deleted</span>
+<span class="gp">$</span> kubectl get pods -o wide
+<span class="go">NAME                       READY   STATUS    RESTARTS   AGE   IP          NODE                                                NOMINATED NODE</span>
+<span class="go">mynginx-784f9847d4-czbsm   1/1     Running   0          5s    10.0.2.50   gke-standard-cluster-1-default-pool-0423aa15-rbfv   &lt;none&gt;</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl run amazonlinux2 --rm --restart Never --image amazonlinux:2 -it -- curl -I mynginx.default.svc.cluster.local:80
+<span class="go">HTTP/1.1 200 OK</span>
+<span class="go">Server: nginx/1.17.1</span>
+<span class="go">Date: Fri, 12 Jul 2019 17:36:50 GMT</span>
+<span class="go">Content-Type: text/html</span>
+<span class="go">Content-Length: 612</span>
+<span class="go">Last-Modified: Tue, 25 Jun 2019 12:19:45 GMT</span>
+<span class="go">Connection: keep-alive</span>
+<span class="go">ETag: &quot;5d121161-264&quot;</span>
+<span class="go">Accept-Ranges: bytes</span>
+
+<span class="go">pod &quot;amazonlinux2&quot; deleted</span>
+</pre></div>
+
+
+<h3 id="pod_1">Podのスケールアウト<a class="headerlink" href="#pod_1" title="Permanent link">&para;</a></h3>
+<p><img alt="service multiple" src="../imgs/service-multiple.png" /></p>
+<p>Serviceは複数のPodを紐付けることが可能です。<br />
+先ほど作成したnginxのDeploymentを2台にスケールアウトして、アクセスログを確認してみましょう。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl scale --replicas<span class="o">=</span><span class="m">2</span> deployment mynginx
+<span class="go">deployment.extensions/mynginx scaled</span>
+<span class="gp">$</span> kubectl get pods
+<span class="go">NAME                       READY   STATUS    RESTARTS   AGE</span>
+<span class="go">mynginx-784f9847d4-2kg9f   1/1     Running   0          12s</span>
+<span class="go">mynginx-784f9847d4-czbsm   1/1     Running   0          11m</span>
+</pre></div>
+
+
+<p>何度かcurlを打ってからPodのログを確認してみましょう</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl run amazonlinux2 --rm --restart Never --image amazonlinux:2 -it -- curl -I mynginx.default.svc.cluster.local
+<span class="go">  :</span>
+<span class="go">  :</span>
+<span class="go">  :</span>
+<span class="gp">$</span> kubectl get pods
+<span class="go">NAME                       READY   STATUS    RESTARTS   AGE</span>
+<span class="go">mynginx-784f9847d4-2kg9f   1/1     Running   0          18m</span>
+<span class="go">mynginx-784f9847d4-czbsm   1/1     Running   0          30m</span>
+<span class="gp">$</span> kubectl logs mynginx-784f9847d4-2kg9f
+<span class="go">10.0.2.56 - - [12/Jul/2019:17:39:15 +0000] &quot;GET / HTTP/1.1&quot; 200 612 &quot;-&quot; &quot;curl/7.61.1&quot; &quot;-&quot;</span>
+<span class="go">10.0.2.56 - - [12/Jul/2019:17:39:39 +0000] &quot;GET / HTTP/1.1&quot; 200 612 &quot;-&quot; &quot;curl/7.61.1&quot; &quot;-&quot;</span>
+<span class="go">10.0.2.59 - - [12/Jul/2019:17:44:55 +0000] &quot;HEAD / HTTP/1.1&quot; 200 0 &quot;-&quot; &quot;curl/7.61.1&quot; &quot;-&quot;</span>
+<span class="go">10.0.2.61 - - [12/Jul/2019:17:45:19 +0000] &quot;HEAD / HTTP/1.1&quot; 200 0 &quot;-&quot; &quot;curl/7.61.1&quot; &quot;-&quot;</span>
+<span class="go">10.0.2.65 - - [12/Jul/2019:17:51:15 +0000] &quot;HEAD / HTTP/1.1&quot; 200 0 &quot;-&quot; &quot;curl/7.61.1&quot; &quot;-&quot;</span>
+<span class="go">10.0.2.69 - - [12/Jul/2019:17:51:25 +0000] &quot;HEAD / HTTP/1.1&quot; 200 0 &quot;-&quot; &quot;curl/7.61.1&quot; &quot;-&quot;</span>
+<span class="gp">$</span> kubectl logs mynginx-784f9847d4-czbsm
+<span class="go">10.0.2.53 - - [12/Jul/2019:17:36:50 +0000] &quot;HEAD / HTTP/1.1&quot; 200 0 &quot;-&quot; &quot;curl/7.61.1&quot; &quot;-&quot;</span>
+<span class="go">10.0.2.63 - - [12/Jul/2019:17:51:11 +0000] &quot;HEAD / HTTP/1.1&quot; 200 0 &quot;-&quot; &quot;curl/7.61.1&quot; &quot;-&quot;</span>
+<span class="go">10.0.2.67 - - [12/Jul/2019:17:51:19 +0000] &quot;HEAD / HTTP/1.1&quot; 200 0 &quot;-&quot; &quot;curl/7.61.1&quot; &quot;-&quot;</span>
+<span class="go">10.0.2.71 - - [12/Jul/2019:17:51:35 +0000] &quot;HEAD / HTTP/1.1&quot; 200 0 &quot;-&quot; &quot;curl/7.61.1&quot; &quot;-&quot;</span>
+</pre></div>
+
+
+<h2 id="_2">お片付け<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>Serviceの削除</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl delete service mynginx
+</pre></div>
+
+
+<p>Deploymentの削除</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl delete deployment mynginx
+</pre></div>
+
+
+<h2 id="_3">参照<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service - Kubernetes</a></li>
+<li><a href="https://qiita.com/kouares/items/94a073baed9dffe86ea0">Kubernetesの Service についてまとめてみた - Qiita</a></li>
+<li><a href="https://cloud.google.com/kubernetes-engine/docs/concepts/service">Service  |  Kubernetes Engine Documentation  |  Google Cloud</a></li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../deployment/" title="Deployment" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前
+                </span>
+                Deployment
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../ingress/" title="Ingress" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  次
+                </span>
+                Ingress
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../assets/custom.js"></script>
+      
+    
+  </body>
+</html>

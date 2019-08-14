@@ -1,0 +1,747 @@
+
+
+
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="クリップボードへコピー">
+      
+        <meta name="lang:clipboard.copied" content="コピーしました">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="何も見つかりませんでした">
+      
+        <meta name="lang:search.result.one" content="1件見つかりました">
+      
+        <meta name="lang:search.result.other" content="#件見つかりました">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-　、。，．]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>コンテナの作成 - 入門 Kubernetes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../assets/custom.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#docker" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="入門 Kubernetes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              入門 Kubernetes
+            </span>
+            <span class="md-header-nav__topic">
+              
+                コンテナの作成
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            検索キーワードを入力してください
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="入門 Kubernetes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    入門 Kubernetes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      はじめに
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        はじめに
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1_introduction/docker/" title="Dockerとは" class="md-nav__link">
+      Dockerとは
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1_introduction/orchestration/" title="コンテナオーケストレーションツールとは" class="md-nav__link">
+      コンテナオーケストレーションツールとは
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1_introduction/kubernetes/" title="Kubernetesとは" class="md-nav__link">
+      Kubernetesとは
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      さわってみる
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        さわってみる
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cluster/" title="クラスターの作成" class="md-nav__link">
+      クラスターの作成
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        コンテナの作成
+      </label>
+    
+    <a href="./" title="コンテナの作成" class="md-nav__link md-nav__link--active">
+      コンテナの作成
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#docker" title="Dockerを起動する" class="md-nav__link">
+    Dockerを起動する
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nginx" title="nginxに接続する" class="md-nav__link">
+    nginxに接続する
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indexhtml" title="index.htmlを編集してみる" class="md-nav__link">
+    index.htmlを編集してみる
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="自動復旧の確認" class="md-nav__link">
+    自動復旧の確認
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../loadbalancer/" title="ロードバランサを立てる" class="md-nav__link">
+      ロードバランサを立てる
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../iac/" title="コードで定義する" class="md-nav__link">
+      コードで定義する
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../finish/" title="片付け" class="md-nav__link">
+      片付け
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Objectsを知る
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Objectsを知る
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3_objects/pod/" title="Pod" class="md-nav__link">
+      Pod
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3_objects/replicaset/" title="ReplicaSet" class="md-nav__link">
+      ReplicaSet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3_objects/deployment/" title="Deployment" class="md-nav__link">
+      Deployment
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3_objects/service/" title="Service" class="md-nav__link">
+      Service
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3_objects/ingress/" title="Ingress" class="md-nav__link">
+      Ingress
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3_objects/other/" title="その他" class="md-nav__link">
+      その他
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../5_nextstep/" title="次のステップ" class="md-nav__link">
+      次のステップ
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#docker" title="Dockerを起動する" class="md-nav__link">
+    Dockerを起動する
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nginx" title="nginxに接続する" class="md-nav__link">
+    nginxに接続する
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indexhtml" title="index.htmlを編集してみる" class="md-nav__link">
+    index.htmlを編集してみる
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="自動復旧の確認" class="md-nav__link">
+    自動復旧の確認
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>コンテナの作成</h1>
+                
+                <h2 id="docker">Dockerを起動する<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h2>
+<p>NginxのDockerイメージをGKE上で起動してみましょう。  </p>
+<p><code>kubectl create deployment &lt;命名&gt; --image=&lt;Dockerイメージ&gt;</code> でDockerを起動することができます。<br />
+今回は <strong>"handson"</strong> という名前で <strong>"nginx Dockerイメージ"</strong> を起動してみましょう。  </p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl create deployment handson --image nginx
+<span class="go">deployment.apps/handson created</span>
+</pre></div>
+
+
+<p>現在のKubernetesのObjectsを確認してみます。  </p>
+<p>以下のように2行目の"pod/handson-&lt;HASH値>"の"STATUS"が"Running"の表示になっていることを確認してください。  </p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl get all
+<span class="go">NAME                           READY     STATUS    RESTARTS   AGE</span>
+<span class="go">pod/handson-57bb9b4684-mgdkl   1/1       Running   0          10s</span>
+<span class="go">NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE</span>
+<span class="go">service/kubernetes   ClusterIP   10.3.240.1   &lt;none&gt;        443/TCP   1h</span>
+<span class="go">NAME                      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE</span>
+<span class="go">deployment.apps/handson   1         1         1            1           10s</span>
+<span class="go">NAME                                 DESIRED   CURRENT   READY     AGE</span>
+<span class="go">replicaset.apps/handson-57bb9b4684   1         1         1         10s</span>
+</pre></div>
+
+
+<h2 id="nginx">nginxに接続する<a class="headerlink" href="#nginx" title="Permanent link">&para;</a></h2>
+<p><img alt="cs-kubectl-port-forward.png" src="../imgs/cs-kubectl-port-forward.png" /></p>
+<p>Kubernetesはクラスタ内のコンテナをローカルへポートフォワードすることが可能です。<br />
+先程立ち上げたnginxコンテナをローカルから見てみましょう。</p>
+<p><code>kubectl port-foward</code> コマンドでポートフォワードを簡単に行なえます。<br />
+以下のコマンドでnginxコンテナの80ポートをローカルの8080へポートフォワードを行ってみましょう。<br />
+<code>&lt;POD NAME&gt;</code> は <code>kubectl get pods</code> で取得します。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl port-forward &lt;POD NAME&gt; <span class="m">8080</span>:80
+</pre></div>
+
+
+<p>これでローカルの8080へポートフォワードが行えました。  </p>
+<p>gcloudのプレビュー機能を使ってnginxが起動できているか確認してみましょう。</p>
+<p><img alt="cs-web-preview.png" src="../imgs/cs-web-preview.png" /></p>
+<h2 id="indexhtml">index.htmlを編集してみる<a class="headerlink" href="#indexhtml" title="Permanent link">&para;</a></h2>
+<p>新しいターミナルを立ち上げて、現在起動しているコンテナの編集を行ってみましょう。  </p>
+<p>Kubernetesは起動中のコンテナにコマンドを実行することが可能です。<br />
+実際にbashを立ち上げて、index.htmlを編集してみましょう。</p>
+<p>起動中のPodのNAMEを取得します。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl get pods
+<span class="go">NAME                       READY   STATUS    RESTARTS   AGE</span>
+<span class="go">handson-5676646c85-dbt4m   1/1     Running   0          34m</span>
+</pre></div>
+
+
+<p><code>kubectl exec</code> を行うことで任意のコマンドを実行できます。<br />
+bashコマンドを実行してコンテナの中に入ってみましょう。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl <span class="nb">exec</span> -it &lt;POD NAME&gt; bash
+<span class="gp">root@handson-5676646c85-dbt4m:/#</span>
+</pre></div>
+
+
+<p>index.htmlの存在を確認し、 "hello" という文字列を書き込みます</p>
+<div class="codehilite"><pre><span></span><span class="gp">#</span> ls /usr/share/nginx/html/
+<span class="go">50x.html  index.html</span>
+<span class="gp">#</span> <span class="nb">echo</span> <span class="s2">&quot;hello&quot;</span> &gt; /usr/share/nginx/html/index.html
+</pre></div>
+
+
+<p>先程と同様gcloudのプレビュー機能を使ってnginxコンテナへ接続してみましょう。</p>
+<p>ブラウザ上で"hello"が確認できたら完了です。</p>
+<h2 id="_1">自動復旧の確認<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Kubernetesの自動復旧機能を確認してみましょう。  </p>
+<p>先程作成したPodのNAMEを確認し、削除してみましょう。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl get pods
+<span class="go">NAME                       READY   STATUS    RESTARTS   AGE</span>
+<span class="go">handson-5676646c85-dbt4m   1/1     Running   0          46m</span>
+<span class="gp">$</span> kubectl delete pod/handson-5676646c85-dbt4m
+<span class="go">pod &quot;handson-5676646c85-dbt4m&quot; deleted</span>
+</pre></div>
+
+
+<p>podの一覧を確認してみましょう。<br />
+先程削除したはずのnginxコンテナが復活しています。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl get pods
+<span class="go">NAME                       READY   STATUS    RESTARTS   AGE</span>
+<span class="go">handson-5676646c85-vwkxd   1/1     Running   0          7s</span>
+</pre></div>
+
+
+<p>では、index.htmlはどうなっているでしょうか。  </p>
+<p>再度新しく起動されたPodを指定してポートフォワードを実行してみましょう。  </p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> kubectl port-forward &lt;POD NAME&gt; <span class="m">8080</span>:80
+</pre></div>
+
+
+<p>gcloudのwebプレビューから確認し、編集前のindex.htmlになっていることが確認できるはずです。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../cluster/" title="クラスターの作成" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前
+                </span>
+                クラスターの作成
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../loadbalancer/" title="ロードバランサを立てる" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  次
+                </span>
+                ロードバランサを立てる
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../assets/custom.js"></script>
+      
+    
+  </body>
+</html>
